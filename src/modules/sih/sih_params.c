@@ -42,7 +42,7 @@
 /**
  * Vehicle mass
  *
- * This value can be measured by weighting the quad on a scale.
+ * This value can be measured by weighting the quad on a scale. default 1.0
  *
  * @unit kg
  * @min 0.0
@@ -50,13 +50,13 @@
  * @increment 0.1
  * @group Simulation In Hardware
  */
-PARAM_DEFINE_FLOAT(SIH_MASS, 1.0f);
+PARAM_DEFINE_FLOAT(SIH_MASS, 0.7f);
 
 /**
  * Vehicle inertia about X axis
  *
  * The intertia is a 3 by 3 symmetric matrix.
- * It represents the difficulty of the vehicle to modify its angular rate.
+ * It represents the difficulty of the vehicle to modify its angular rate. default 0.025
  *
  * @unit kg*m*m
  * @min 0.0
@@ -64,13 +64,13 @@ PARAM_DEFINE_FLOAT(SIH_MASS, 1.0f);
  * @increment 0.005
  * @group Simulation In Hardware
  */
-PARAM_DEFINE_FLOAT(SIH_IXX, 0.025f);
+PARAM_DEFINE_FLOAT(SIH_IXX, 0.005f);
 
 /**
  * Vehicle inertia about Y axis
  *
  * The intertia is a 3 by 3 symmetric matrix.
- * It represents the difficulty of the vehicle to modify its angular rate.
+ * It represents the difficulty of the vehicle to modify its angular rate. default 0.025
  *
  * @unit kg*m*m
  * @min 0.0
@@ -78,13 +78,13 @@ PARAM_DEFINE_FLOAT(SIH_IXX, 0.025f);
  * @increment 0.005
  * @group Simulation In Hardware
  */
-PARAM_DEFINE_FLOAT(SIH_IYY, 0.025f);
+PARAM_DEFINE_FLOAT(SIH_IYY, 0.005f);
 
 /**
  * Vehicle inertia about Z axis
  *
  * The intertia is a 3 by 3 symmetric matrix.
- * It represents the difficulty of the vehicle to modify its angular rate.
+ * It represents the difficulty of the vehicle to modify its angular rate. default 0.030
  *
  * @unit kg*m*m
  * @min 0.0
@@ -92,7 +92,7 @@ PARAM_DEFINE_FLOAT(SIH_IYY, 0.025f);
  * @increment 0.005
  * @group Simulation In Hardware
  */
-PARAM_DEFINE_FLOAT(SIH_IZZ, 0.030f);
+PARAM_DEFINE_FLOAT(SIH_IZZ, 0.01f);
 
 /**
  * Vehicle cross term inertia xy
@@ -139,7 +139,7 @@ PARAM_DEFINE_FLOAT(SIH_IYZ, 0.0f);
  * This is the maximum force delivered by one propeller
  * when the motor is running at full speed.
  *
- * This value is usually about 5 times the mass of the quadrotor.
+ * This value is usually about 5 times the mass of the quadrotor. default 5.0
  *
  * @unit N
  * @min 0.0
@@ -147,7 +147,7 @@ PARAM_DEFINE_FLOAT(SIH_IYZ, 0.0f);
  * @increment 0.5
  * @group Simulation In Hardware
  */
-PARAM_DEFINE_FLOAT(SIH_T_MAX, 5.0f);
+PARAM_DEFINE_FLOAT(SIH_T_MAX, 3.5f);
 
 /**
  * Max propeller torque
@@ -155,7 +155,7 @@ PARAM_DEFINE_FLOAT(SIH_T_MAX, 5.0f);
  * This is the maximum torque delivered by one propeller
  * when the motor is running at full speed.
  *
- * This value is usually about few percent of the maximum thrust force.
+ * This value is usually about few percent of the maximum thrust force. default 0.1
  *
  * @unit Nm
  * @min 0.0
@@ -163,7 +163,7 @@ PARAM_DEFINE_FLOAT(SIH_T_MAX, 5.0f);
  * @increment 0.05
  * @group Simulation In Hardware
  */
-PARAM_DEFINE_FLOAT(SIH_Q_MAX, 0.1f);
+PARAM_DEFINE_FLOAT(SIH_Q_MAX, 0.05f);
 
 /**
  * Roll arm length
@@ -171,7 +171,7 @@ PARAM_DEFINE_FLOAT(SIH_Q_MAX, 0.1f);
  * This is the arm length generating the rolling moment
  *
  * This value can be measured with a ruler.
- * This corresponds to half the distance between the left and right motors.
+ * This corresponds to half the distance between the left and right motors. default 0.2
  *
  * @unit m
  * @min 0.0
@@ -179,7 +179,7 @@ PARAM_DEFINE_FLOAT(SIH_Q_MAX, 0.1f);
  * @increment 0.05
  * @group Simulation In Hardware
  */
-PARAM_DEFINE_FLOAT(SIH_L_ROLL, 0.2f);
+PARAM_DEFINE_FLOAT(SIH_L_ROLL, 0.15f);
 
 /**
  * Pitch arm length
@@ -187,7 +187,7 @@ PARAM_DEFINE_FLOAT(SIH_L_ROLL, 0.2f);
  * This is the arm length generating the pitching moment
  *
  * This value can be measured with a ruler.
- * This corresponds to half the distance between the front and rear motors.
+ * This corresponds to half the distance between the front and rear motors. default 0.2
  *
  * @unit m
  * @min 0.0
@@ -195,7 +195,7 @@ PARAM_DEFINE_FLOAT(SIH_L_ROLL, 0.2f);
  * @increment 0.05
  * @group Simulation In Hardware
  */
-PARAM_DEFINE_FLOAT(SIH_L_PITCH, 0.2f);
+PARAM_DEFINE_FLOAT(SIH_L_PITCH, 0.1f);
 
 /**
  * First order drag coefficient
@@ -204,7 +204,7 @@ PARAM_DEFINE_FLOAT(SIH_L_PITCH, 0.2f);
  * The greater this value, the slower the quad will move.
  *
  * Drag force function of velocity: D=-KDV*V.
- * The maximum freefall velocity can be computed as V=10*MASS/KDV [m/s]
+ * The maximum freefall velocity can be computed as V=10*MASS/KDV [m/s], default 1.0
  *
  * @unit N/(m/s)
  * @min 0.0
@@ -212,12 +212,12 @@ PARAM_DEFINE_FLOAT(SIH_L_PITCH, 0.2f);
  * @increment 0.05
  * @group Simulation In Hardware
  */
-PARAM_DEFINE_FLOAT(SIH_KDV, 1.0f);
+PARAM_DEFINE_FLOAT(SIH_KDV, 0.1f);
 
 /**
  * First order angular damper coefficient
  *
- * Physical coefficient representing the friction with air particules during rotations.
+ * Physical coefficient representing the friction with air particules during rotations. default 0.025
  * The greater this value, the slower the quad will rotate.
  *
  * Aerodynamic moment function of body rate: Ma=-KDW*W_B.
@@ -229,7 +229,7 @@ PARAM_DEFINE_FLOAT(SIH_KDV, 1.0f);
  * @increment 0.005
  * @group Simulation In Hardware
  */
-PARAM_DEFINE_FLOAT(SIH_KDW, 0.025f);
+PARAM_DEFINE_FLOAT(SIH_KDW, 0.005f);
 
 /**
  * Initial geodetic latitude

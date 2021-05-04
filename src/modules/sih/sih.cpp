@@ -265,7 +265,12 @@ void Sih::read_motors()
 		orb_copy(ORB_ID(actuator_outputs), _actuator_out_sub, &actuators_out);
 
 		for (int i = 0; i < NB_MOTORS; i++) { // saturate the motor signals
-			_u[i] = constrain((actuators_out.output[i] - PWM_DEFAULT_MIN) / (PWM_DEFAULT_MAX - PWM_DEFAULT_MIN), 0.0f, 1.0f);
+			if (i < 3) {
+					_u[i] = constrain((actuators_out.output[i] - PWM_DEFAULT_MIN) / (PWM_DEFAULT_MAX - PWM_DEFAULT_MIN), 0.0f, 1.0f);	
+			}
+			else { // for servo outputs
+					_u[i] = constrain((actuators_out.output[i] - ((PWM_DEFAULT_MAX + PWM_DEFAULT_MIN) / 2)) / ((PWM_DEFAULT_MAX - PWM_DEFAULT_MIN) / 2), -1.0f, 1.0f);
+			}
 		}
 	}
 }
@@ -273,10 +278,10 @@ void Sih::read_motors()
 // generate the motors thrust and torque in the body frame
 void Sih::generate_force_and_torques()
 {
-	_T_B = Vector3f(0.0f, 0.0f, -_T_MAX * (+_u[0] + _u[1] + _u[2] + _u[3]));
-	_Mt_B = Vector3f(_L_ROLL * _T_MAX * (-_u[0] + _u[1] + _u[2] - _u[3]),
-			 _L_PITCH * _T_MAX * (+_u[0] - _u[1] + _u[2] - _u[3]),
-			 _Q_MAX * (+_u[0] + _u[1] - _u[2] - _u[3]));
+	_T_B = Vector3f(0.0f, 0.0f, -_T_MAX * (+_u[0] + _u[1] + _u[2]*cos(_u[3])));
+	_Mt_B = Vector3f(_L_ROLL * _T_MAX * (-_u[0] + _u[1]),
+			 _L_PITCH * _T_MAX * (+_u[0] + _u[1]) - (_L_ROLL *_T_MAX * (+_u[2]*cos( _u[3]))) - (_Q_MAX * (+_u[2]*sin(_u[3]))),
+			 _Q_MAX * (-_u[0] - _u[1] - _u[2] * cos(_u[3])) + (_L_ROLL * _T_MAX * (+_u[2]*sin(_u[3]))));
 
 	_Fa_I = -_KDV * _v_I;   // first order drag to slow down the aircraft
 	_Ma_B = -_KDW * _w_B;   // first order angular damper

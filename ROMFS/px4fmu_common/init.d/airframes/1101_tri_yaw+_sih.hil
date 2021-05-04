@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# @name SIH Tri+
+#
+# @type Simulation
+# @class Copter
+#
+# @maintainer D Abara <dabara2004@yhoo.com>
+#
+
+sh /etc/init.d/rc.mc_defaults
+
+set MIXER tri_y_yaw+
+set PWM_OUT 1234
+
+# set SYS_HITL to 2 to start the SIH and avoid sensors startup
+param set SYS_HITL 2
