@@ -137,6 +137,7 @@ px4_add_romfs_files(
 	# [14000, 14999] Tri Y
 	14001_tri_y_yaw+
 	14002_tri_y_yaw-
+	14003_tri_exp+
 
 	15001_coax_heli
 

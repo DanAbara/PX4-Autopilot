@@ -1,0 +1,22 @@
+# Multi-rotor tilt tricopter Aux Mixer
+# Yaw servos x3 +Output ==> -Yaw Vehicle rotation
+#
+# Manual passthrough for servos 1, 2 using one RC channel via RC_MAP_AUX1
+# Manual passthrough for servos 1, 2, 3 using another RC channel via RC_MAP_AUX2
+
+# Servo 1
+M: 3
+S: 0 2   6000   6000  0 -10000 10000
+S: 3 5   6500   6500  0 -10000 10000
+S: 3 6  -6500  -6500  0 -10000 10000
+
+# Servo 2
+M: 3
+S: 0 2   6000   6000  0 -10000 10000
+S: 3 5  -6500  -6500  0 -10000 10000
+S: 3 6  -6500  -6500  0 -10000 10000
+
+# Servo 3
+M: 2
+S: 0 2   6000   6000  0 -10000 10000
+S: 3 6   6500   6500  0 -10000 10000

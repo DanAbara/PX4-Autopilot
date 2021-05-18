@@ -1,0 +1,5 @@
+# Multi-rotor tilt tricopter Main Outputs MIXER
+# <Tricopter> <roll scale> <pitch sacale> <yaw scale> <idle speed>
+
+# Motors
+R: 3ym 10000 10000 10000 0
